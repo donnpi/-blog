@@ -1,9 +1,21 @@
 {{extend './common/layout.art'}} {{block 'main'}}
-<p class="bg-danger error">{{msg}}</p>
+<p class="bg-danger error">{{msg}} <span id="timer"></span></p>
+
 {{/block}} {{block 'script'}}
-<script>
-    setTimeout(function() {
-        location.href = '/admin/login';
-    }, 3000)
+<script type="text/javascript">
+    var time = 3;
+
+    function run(i) {
+        $('#timer').text(i + '秒后跳转回登录页');
+    };
+    run(time);
+    setInterval(function() {
+        time--;
+        if (time == 0) {
+            location.href = '/admin/login';
+        }
+        run(time);
+
+    }, 1000)
 </script>
 {{/block}}

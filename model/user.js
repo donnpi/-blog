@@ -1,5 +1,10 @@
 //创建用户模块
 const mongoose = require('mongoose');
+
+//导入bcrypt
+const bcrypt = require('bcrypt');
+
+
 //创建用户集合规则
 const userSehema = new mongoose.Schema({
     username: {
@@ -20,6 +25,9 @@ const userSehema = new mongoose.Schema({
         type: String,
         require: true
     },
+    password: {
+        type: String
+    },
     status: {
         //0 启动状态
         //1 禁止状态
@@ -32,14 +40,20 @@ const userSehema = new mongoose.Schema({
 const User = mongoose.model('User', userSehema);
 
 //测试代码
-// User.create({
-//         username: 'nico',
-//         email: 'nico@136.com',
-//         password: 123456,
-//         role: 'admin',
-//         state: 0
-//     }).then(() => { console.log('用户创建成功') }).catch(err => { console.log(err, '用户创建失败') })
-//     //将用户集合作为模块成员导出
+async function createUser() {
+    const salt = await bcrypt.genSalt(10);
+    const pass = await bcrypt.hash('123456', salt);
+    const user = await User.create({
+        username: 'nico',
+        email: 'nico@136.com',
+        password: pass,
+        role: 'admin',
+        state: 0
+    });
+
+
+}
+
 
 
 module.exports = {
