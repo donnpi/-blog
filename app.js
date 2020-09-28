@@ -47,8 +47,19 @@ app.use((err, req, res, next) => {
     //next里的参数实际就是err
     //接收过来的字符串要转换一下
     const result = JSON.parse(err);
-    console.log(`${result.path}?message=${result.message}`);
-    res.redirect(`${result.path}?message=${result.message}`);
+
+
+    // res.redirect(`${result.path}?message=${result.message}`);
+    //path后面的参数个数是不固定的
+    let params = [];
+    for (let attr in result) {
+        if (attr != 'path') {
+            params.push(attr + '=' + result[attr]);
+        }
+    };
+    res.redirect(`${result.path}?${params.join('&')}`)
+
+
 
 })
 

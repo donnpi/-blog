@@ -66,11 +66,11 @@ const emailCheck = email => {
 
 };
 
-//密码加密
-const bcryptPass = async(password) => {
+//密码加密 这里用不了
+const bcryptPass = async function(password) {
     const salt = await bcrypt.genSalt(10);
-    const pass = await bcrypt.hash(password, salt);
-    return pass
+    return await bcrypt.hash(password, salt);
+
 }
 
 
@@ -97,6 +97,4 @@ module.exports = {
     validate,
     emailCheck,
     bcryptPass
-
-
 }

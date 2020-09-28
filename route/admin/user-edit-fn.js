@@ -1,5 +1,5 @@
-const { validate, emailCheck, bcryptPass } = require('../../model/user');
-
+const { User, validate, emailCheck, bcryptPass } = require('../../model/user');
+const bcrypt = require('bcrypt');
 module.exports = async(req, res, next) => {
 
 
@@ -14,7 +14,7 @@ module.exports = async(req, res, next) => {
 
         //到错误处理中间件统一处理
         //next只接收一个对象，并且是字符串
-        return next(JSON.stringify({ path: '/admin/user-edit', message: e.message }))
+        return next(JSON.stringify({ path: '/admin/user-edit', message: e.message }));
     };
 
 
@@ -24,8 +24,11 @@ module.exports = async(req, res, next) => {
     }
 
     //密码加密
-    req.body.password = bcryptPass(req.body.password);
     //把明文密码替换掉
+    const salt = await bcrypt.genSalt(10);
+    req.body.password = await bcrypt.hash(req.body.password, salt);
+
+    // req.body.password = bcryptPass(req.body.password);
 
     await User.create(req.body);
     res.redirect('/admin/user');
