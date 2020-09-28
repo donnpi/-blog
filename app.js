@@ -31,15 +31,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 //拦截请求，以/admin开头的访问，需要验证登录状态
 app.use('/admin', require('./middleware/loginGuard'));
 
-//为路由匹配请求路径
+
+//引入路由
 const admin = require('./route/admin');
 const home = require('./route/home');
 
-//连接路由
+
+//为路由匹配请求路径
 app.use('/home', home);
 app.use('/admin', admin);
 
 
+//错误处理中间件
+app.use((err, req, res, next) => {
+    //next里的参数实际就是err
+    //接收过来的字符串要转换一下
+    const result = JSON.parse(err);
+    console.log(`${result.path}?message=${result.message}`);
+    res.redirect(`${result.path}?message=${result.message}`);
+
+})
 
 //监听端口
 app.listen(80);

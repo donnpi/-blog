@@ -11,6 +11,10 @@ admin.get('/user', require('./admin/userPage'));
 //实现退出功能
 admin.get('/logout', require('./admin/logout'));
 
+//渲染创建用户页面
+admin.get('/user-edit', require('./admin/user-edit'));
 
+//实现添加用户功能
+admin.post('/user-edit', require('./admin/user-edit-fn'))
 
 module.exports = admin;
