@@ -17,7 +17,13 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //配置session
-app.use(session({ secret: 'secret key' }));
+app.use(session({
+    secret: 'secret key',
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 24 * 60 * 60 * 1000
+    }
+}));
 
 //框架模板:设置模板引擎,默认路径.默认后缀
 app.engine('art', require('express-art-template'));

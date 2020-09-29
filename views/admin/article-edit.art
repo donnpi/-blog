@@ -9,30 +9,32 @@
             <h4>5b9a716cb2d2bf17706bcc0a</h4>
         </div>
         <!-- /分类标题 -->
-        <form class="form-container">
+        <!-- enctype:指定表单数据的编码类型
+        默认值： -->
+        <form class="form-container" action="/admin/article-add" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label>标题</label>
-                <input type="text" class="form-control" placeholder="请输入文章标题">
+                <input name="title" type="text" class="form-control" placeholder="请输入文章标题">
             </div>
             <div class="form-group">
                 <label>作者</label>
-                <input type="text" class="form-control" readonly>
+                <input value="{{@userInfo._id}}" name="author" value="{{}}" type="text" class="form-control" readonly>
             </div>
             <div class="form-group">
                 <label>发布时间</label>
-                <input type="date" class="form-control">
+                <input name="publishDate" type="date" class="form-control">
             </div>
 
             <div class="form-group">
                 <label for="exampleInputFile">文章封面</label>
-                <input type="file">
+                <input type="file" name="cover" id="file" multiple>
                 <div class="thumbnail-waper">
-                    <img class="img-thumbnail" src="">
+                    <img class="img-thumbnail" src="" id="preview">
                 </div>
             </div>
             <div class="form-group">
                 <label>内容</label>
-                <textarea class="form-control" id="editor"></textarea>
+                <textarea name="content" class="form-control" id="editor"></textarea>
             </div>
             <div class="buttons">
                 <input type="submit" class="btn btn-primary">
@@ -44,7 +46,7 @@
 <!-- /主体内容 -->
 {{/block}} {{block 'script'}}
 <script src="/admin/lib/ckeditor5/ckeditor.js"></script>
-<script type="/admin/text/javascript">
+<script type="text/javascript">
     let editor;
 
     ClassicEditor
@@ -58,5 +60,26 @@
 
     // 获取数据
     // const editorData = editor.getData();
+
+
+    //选择文件上传控件
+    var file = document.querySelector('#file');
+
+    var preview = document.querySelector('#preview');
+
+    //当用户选择完文件
+    file.onchange = function() {
+        //1，创建文件读取对象
+        var reader = new FileReader();
+        //this指这个文件，files属性代表this所在的文件列表，[0]选择第一个
+        console.log(this.files[0]);
+        //2,读取文件,异步方法无法通过返回值拿到结果
+        reader.readAsDataURL(this.files[0]);
+        //3 监听onload事件
+        reader.onload = function() {
+            //将文件读取的结果显示在页面中
+            preview.src = reader.result;
+        }
+    }
 </script>
 {{/block}}

@@ -32,7 +32,7 @@ module.exports = async(req, res) => {
 
             //把用户信息开放到locals下
             //req.app就是app.js创建的网站服务器
-            req.app.locals.userInfo = user.username;
+            req.app.locals.userInfo = user;
 
             //重定向到用户列表页
             res.redirect('/admin/user');
