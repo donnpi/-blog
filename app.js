@@ -9,6 +9,10 @@ const session = require('express-session');
 require('./model/connect');
 //导入post参数处理模块
 const bodyParser = require('body-parser');
+//导入dateFormat第三方模块
+const dateFormat = require('dateformat');
+//导入art-template模板引擎
+const template = require('art-template');
 
 
 
@@ -24,6 +28,9 @@ app.use(session({
         maxAge: 24 * 60 * 60 * 1000
     }
 }));
+
+//向模板内导入dateFormat变量
+template.defaults.imports.dateFormat = dateFormat;
 
 //框架模板:设置模板引擎,默认路径.默认后缀
 app.engine('art', require('express-art-template'));

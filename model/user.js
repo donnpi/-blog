@@ -5,7 +5,6 @@ const Joi = require('joi');
 
 //导入bcrypt
 const bcrypt = require('bcrypt');
-const { urlencoded } = require('body-parser');
 
 
 //创建用户集合规则

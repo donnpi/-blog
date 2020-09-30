@@ -3,7 +3,6 @@
 const formidable = require('formidable');
 const { Article } = require('../../model/article');
 
-
 //上传需要绝对路径
 const path = require('path');
 
@@ -25,14 +24,26 @@ module.exports = (req, res) => {
         //G:\Node\blog\public\upload\upload_f5c1eff09d18c168fb785577f80bda33
         console.log(files.cover.path.split('public')[1]);
         //\upload\upload_f5c1eff09d18c168fb785577f80bda33
-        await Article.create({
-            title: fields.title,
-            author: fields.author,
-            publishDate: fields.publishDate,
-            cover: files.cover.path.split('public')[1],
-            content: fields.content
 
-        })
+        if (req.query.id) {
+            await Article.updateOne({ _id: req.query.id }, {
+                title: fields.title,
+                publishDate: fields.publishDate,
+                cover: files.cover.path.split('public')[1],
+                content: fields.content
+            })
+
+        } else {
+            await Article.create({
+                title: fields.title,
+                author: fields.author,
+                publishDate: fields.publishDate,
+                cover: files.cover.path.split('public')[1],
+                content: fields.content
+
+            })
+        }
+
     });
     res.redirect('/admin/article');
 
