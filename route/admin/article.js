@@ -17,7 +17,6 @@ module.exports = async(req, res) => {
     article = JSON.parse(article);
 
 
-
     // res.send(article);
     res.render('admin/article', {
         article,

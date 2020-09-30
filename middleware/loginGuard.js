@@ -7,8 +7,14 @@ const guard = (req, res, next) => {
     if (req.url != '/login' && !req.session.username) {
         res.redirect('/admin/login')
     } else {
-        //如果是login或登录状态，则将请求放行
+        //如果是要去的login页面||admin页面&&是登录状态&&管理员身份，则将请求放行
+        if (req.session.role == 'normal') {
+            return res.redirect('/home');
+        }
+
         next();
+
     }
+
 };
 module.exports = guard;

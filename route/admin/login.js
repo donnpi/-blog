@@ -29,13 +29,22 @@ module.exports = async(req, res) => {
         if (isValid) {
             //将用户名存储在请求对象中
             req.session.username = user.username;
+            req.session.role = user.role;
 
             //把用户信息开放到locals下
             //req.app就是app.js创建的网站服务器
             req.app.locals.userInfo = user;
 
-            //重定向到用户列表页
-            res.redirect('/admin/user');
+            //对用户的角色进行判断
+            if (user.role == 'admin') {
+                //管理员到用户列表页
+                res.redirect('/admin/user');
+            } else {
+                //普通用户去首页
+                res.redirect('/home')
+            }
+
+
         } else {
             res.status(400).render('admin/error', { msg: '邮箱地址或密码错误' });
         }
