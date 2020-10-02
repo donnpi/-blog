@@ -1,5 +1,3 @@
-const { render } = require("art-template");
-
 const mongoose = require('mongoose');
 
 const commentShema = new mongoose.Schema({

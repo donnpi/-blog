@@ -1,4 +1,3 @@
-const { render } = require('art-template');
 const { User } = require('../../model/user');
 module.exports = async(req, res) => {
     //message是，如果用户信息不合法，提交路由传过来的错误信息

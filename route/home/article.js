@@ -1,4 +1,3 @@
-const { render } = require('art-template');
 const { Article } = require('../../model/article');
 const { Comment } = require('../../model/comment');
 module.exports = async(req, res) => {
