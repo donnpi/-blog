@@ -84,14 +84,16 @@ textarea {
 
 /* 网站logo开始 */
 .logo, .logo a, .logo img {
-	width: 175px;
-	height: 60px;
+	/* width: 175px; */
+	height: 54px;
+	padding-top:1px ;
 }
 
 .logo a,
 .logo img {
-	display: block;
+	display: inline block;
 }
+
 /* 网站logo结束 */
 
 /* 网站导航开始 */
