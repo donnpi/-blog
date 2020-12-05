@@ -18,7 +18,7 @@ module.exports = async(req, res) => {
         //渲染编辑页面
         res.render('admin/user-edit', {
             message,
-            link: '/admin/use-edit',
+            link: '/admin/user-edit',
             button: '添加'
 
         });

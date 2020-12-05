@@ -1,7 +1,7 @@
 {{extend './common/layout.art'}} {{block 'main'}}
 <div class="login-body">
     <div class="login-container">
-        <h4 class="title">Tonz的博客管理员登录</h4>
+        <h4 class="title">Tonz的博客管理系统</h4>
         <div class="login">
             <form action="/admin/login" method="post" id="loginForm">
                 <div class="form-group">
