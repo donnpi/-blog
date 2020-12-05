@@ -16,7 +16,7 @@
 
 #### 安装教程
 1.  npm install
-2.  npm run app.js
+2.  node app.js
 		
 #### 使用说明
 
