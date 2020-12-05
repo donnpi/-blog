@@ -25,4 +25,4 @@
 		- 普通用户：user@gmail.com pwd:123456  
 		- 管理员：admin@gmail.com pwd:123456  
 3.  内有详细注释笔记可供参考
-![avatar]('/xmind.png')
+![avatar](/xmind.png)
